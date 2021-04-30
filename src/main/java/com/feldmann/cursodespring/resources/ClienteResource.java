@@ -15,11 +15,11 @@ import com.feldmann.cursodespring.services.ClienteService;
 public class ClienteResource {
 
 	@Autowired
-	private ClienteService clienteService;
+	private ClienteService service;
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> buscarCliente(@PathVariable Integer id){
-		Cliente obj = clienteService.buscar(id);
+	public ResponseEntity<?> find(@PathVariable Integer id){
+		Cliente obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	

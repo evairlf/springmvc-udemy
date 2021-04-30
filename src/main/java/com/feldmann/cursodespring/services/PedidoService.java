@@ -13,10 +13,10 @@ import com.feldmann.cursodespring.services.exceptions.ObjectNotFoundException;
 public class PedidoService {
 
 	@Autowired
-	private PedidoRepository pedidoRepository;
+	private PedidoRepository repo;
 	
-	public Pedido buscar(Integer id) {
-		Optional<Pedido> obj = pedidoRepository.findById(id);
+	public Pedido find(Integer id) {
+		Optional<Pedido> obj = repo.findById(id);
 		return obj.orElseThrow(()-> new ObjectNotFoundException(
 				"Objeto não encontado id: "+ id + "Tipo: "+ Pedido.class.getName()));
 	}
