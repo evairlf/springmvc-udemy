@@ -21,8 +21,8 @@ private static final long serialVersionUID = 1L;
 private Integer id;
 private String name;
 
-@OneToMany(mappedBy="estado")
 @JsonIgnore
+@OneToMany(mappedBy="estado")
 private List<Cidade> cidades = new ArrayList<>();
 
 public Estado() {}

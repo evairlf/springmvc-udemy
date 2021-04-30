@@ -15,7 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Entity
 public class Pedido implements Serializable{
@@ -24,20 +25,21 @@ private static final long serialVersionUID = 1L;
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private Integer id;
+
+@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 private Date instant;
-
-@ManyToOne
-@JsonIgnore
-@JoinColumn(name="cliente_id")
-private Cliente cliente;
-
-@ManyToOne
-@JsonIgnore
-@JoinColumn(name="endereco_de_entrega_id")
-private Endereco enderecoEntrega;
 
 @OneToOne(cascade = CascadeType.ALL,mappedBy="pedido")
 private Pagamento pagamento;
+
+@ManyToOne
+@JoinColumn(name="cliente_id")
+private Cliente cliente;
+
+
+@ManyToOne
+@JoinColumn(name="endereco_de_entrega_id")
+private Endereco enderecoDeEntrega;
 
 @OneToMany(mappedBy = "id.pedido")
 private Set<ItemPedido> itens = new HashSet<>();
@@ -49,7 +51,7 @@ public Pedido(Integer id, Date instant,Cliente cliente,Endereco enderecoDeEntreg
 	this.id = id;
 	this.instant = instant;
 	this.cliente = cliente;
-	this.enderecoEntrega = enderecoDeEntrega;
+	this.enderecoDeEntrega = enderecoDeEntrega;
 }
 
 public Integer getId() {
@@ -82,6 +84,14 @@ public Cliente getCliente() {
 
 public void setCliente(Cliente cliente) {
 	this.cliente = cliente;
+}
+
+public Endereco getEnderecoDeEntrega() {
+	return enderecoDeEntrega;
+}
+
+public void setEnderecoDeEntrega(Endereco enderecoDeEntrega) {
+	this.enderecoDeEntrega = enderecoDeEntrega;
 }
 
 public Set<ItemPedido> getItens() {

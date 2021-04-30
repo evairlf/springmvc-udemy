@@ -21,7 +21,6 @@ private Integer id;
 private String name;
 
 @ManyToOne
-@JsonIgnore
 @JoinColumn(name="estado_id")
 private Estado estado;
 

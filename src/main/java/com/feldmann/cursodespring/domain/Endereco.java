@@ -31,7 +31,6 @@ private String cep;
 private Cliente cliente;
 
 @ManyToOne
-@JsonIgnore
 @JoinColumn(name="cidade_id")
 private Cidade cidade;
 
