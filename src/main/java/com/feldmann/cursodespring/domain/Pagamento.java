@@ -14,6 +14,7 @@ import com.feldmann.cursodespring.domain.enums.EstadoPagamento;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+//So vai Inheritance na super classe abstrata
 public abstract class Pagamento implements Serializable{
 private static final long serialVersionUID = 1L;
 
