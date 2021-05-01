@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import com.feldmann.cursodespring.domain.Categoria;
 import com.feldmann.cursodespring.dto.CategoriaDTO;
 import com.feldmann.cursodespring.services.CategoriaService;
@@ -36,8 +38,9 @@ public class CategoriaResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<?> insert(@RequestBody Categoria obj) {
-		obj = service.insert(obj);
+	public ResponseEntity<?> insert(@Valid @RequestBody CategoriaDTO objDto) {
+
+		Categoria obj = service.fromDTO(objDto);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 
@@ -45,8 +48,8 @@ public class CategoriaResource {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<?> update(@RequestBody Categoria obj, @PathVariable Integer id) {
-		obj.setId(id);
+	public ResponseEntity<?> update(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id) {
+		Categoria obj = service.fromDTO(objDto);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
